@@ -1,5 +1,8 @@
-require "doctor_doug/version"
+# frozen_string_literal: true
 
-module DoctorDoug
-  # Your code goes here...
+require 'doctor_doug/version'
+require 'doctor_doug/checkup'
+require 'doctor_doug/notify/base'
+
+module DoctorDoug # :nodoc:
 end
