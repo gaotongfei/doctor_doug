@@ -1,8 +1,6 @@
 # DoctorDoug
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/doctor_doug`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Under development
 
 ## Installation
 
@@ -22,7 +20,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+DoctorDoug.checkup "user name should not be blank" do
+  users = User.where(updated_at: 1.hour.ago..Time.now)
+  notify :if, any: users do |user|
+    user.name.blank?
+  end
+end
+
+```
 
 ## Development
 
