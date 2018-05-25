@@ -14,10 +14,8 @@ class CheckupProxy # :nodoc:
   end
 
   def notify(condition, any:)
-    raise 'NoneBlockGiven' unless block_given?
-
+    raise NoneBlockGivenError unless block_given?
     collections = any
-
     collections.each do |c|
       block_result = yield c
       if !!block_result == block_result

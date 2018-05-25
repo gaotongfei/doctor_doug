@@ -1,0 +1,8 @@
+Style/SymbolArray:
+  Enabled: false
+
+Metrics/LineLength:
+  Max: 120
+
+Gemspec/OrderedDependencies:
+  Enabled: false
