@@ -1,8 +1,6 @@
 # DoctorDoug
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/doctor_doug`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Run checkup and notify you by mail when there are violations 
 
 ## Installation
 
@@ -22,7 +20,33 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```
+# config/initializers/doctor_doug.rb
+
+DoctorDoug.configure do |config|
+  config.strategies = [:mail]
+  config.mail_options = {
+      address: 'smtp.gmail.com',
+      port: 587,
+      domain: 'gmail.com',
+      user_name: 'youremail@gmail.com',
+      password: 'password',
+      authentication: 'plain',
+      from: 'from@gmail.com',
+      to: 'to@gmail.com'
+  }
+end
+```
+
+```
+DoctorDoug.checkup "user name should not be blank" do
+  users = User.where(updated_at: 1.hour.ago..Time.now)
+  notify :if, any: users do |user|
+    user.name.blank? # to make this work, the block must reutrn a boolean value
+  end
+end
+
+```
 
 ## Development
 
@@ -32,4 +56,4 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/doctor_doug.
+Bug reports and pull requests are welcome on GitHub at https://github.com/gaotongfei/doctor_doug.
