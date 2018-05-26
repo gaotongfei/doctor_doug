@@ -1,4 +1,24 @@
+# frozen_string_literal: true
+
 module DoctorDoug
+  # Configure doctor_doug using block style
+  #
+  # For example:
+  #
+  #   # config/initializers/doctor_doug.rb
+  #   DoctorDoug.configure do |config|
+  #     config.strategies = [:mail]
+  #     config.mail_options = {
+  #       address: "smtp.gmail.com",
+  #       port: 587,
+  #       domain: 'gmail.com',
+  #       user_name: 'youremail@gmail.com',
+  #       password: 'password',
+  #       authentication: 'plain',
+  #       from: 'from@gmail.com',
+  #       to: 'to@gmail.com'
+  #     }
+  #   end
   class << self
     attr_accessor :configuration
   end

@@ -6,3 +6,6 @@ Metrics/LineLength:
 
 Gemspec/OrderedDependencies:
   Enabled: false
+
+Layout/IndentHash:
+  Enabled: false

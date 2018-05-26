@@ -11,11 +11,11 @@ class DoctorDougTest < Minitest::Test
     end
   end
 
-  test 'that it has a version number' do
+  def test_that_it_has_a_version_number
     refute_nil ::DoctorDoug::VERSION
   end
 
-  test 'notify with no block given' do
+  def test_notify_with_no_block_given
     assert_raises NoneBlockGivenError do
       DoctorDoug.checkup 'user name should not be blank' do
         notify :if, any: @users_collection

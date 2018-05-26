@@ -9,24 +9,28 @@ module DoctorDoug # :nodoc:
 end
 
 class CheckupProxy # :nodoc:
-  def initialize(name)
-    @name = name
+  def initialize(checkup_name)
+    @checkup_name = checkup_name
   end
 
   def notify(condition, any:)
     raise NoneBlockGivenError unless block_given?
     collections = any
-    collections.each do |c|
+    violations = collections.map do |c|
+      need_notify = false
       block_result = yield c
       if !!block_result == block_result
         need_notify = block_result if condition == :if
         need_notify = !block_result if condition == :unless
-        DoctorDoug::Notify.perform if need_notify
       end
+      c if need_notify
     end
+
+    DoctorDoug::Notify.perform(checkup_name, violations)
   end
 
   private
 
-  attr_reader :name
+  attr_reader :checkup_name
+
 end
