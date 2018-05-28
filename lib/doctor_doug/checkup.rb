@@ -13,16 +13,19 @@ class CheckupProxy # :nodoc:
     @checkup_name = checkup_name
   end
 
+  def violate?(condition)
+    return false unless [true, false].include?(condition)
+    condition
+  end
+
   def notify(condition, any:)
     raise NoneBlockGivenError unless block_given?
     collections = any
     violations = collections.map do |c|
       need_notify = false
       block_result = yield c
-      if !!block_result == block_result
-        need_notify = block_result if condition == :if
-        need_notify = !block_result if condition == :unless
-      end
+      need_notify = block_result if condition == :if
+      need_notify = !block_result if condition == :unless
       c if need_notify
     end
 

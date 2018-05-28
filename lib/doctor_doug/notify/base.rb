@@ -30,7 +30,7 @@ module DoctorDoug
       end
 
       def message
-        "#{@violations.inspect}"
+        @violations.map(&:inspect).join(', ').to_s
       end
     end
   end

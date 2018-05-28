@@ -42,7 +42,7 @@ end
 DoctorDoug.checkup "user name should not be blank" do
   users = User.where(updated_at: 1.hour.ago..Time.now)
   notify :if, any: users do |user|
-    user.name.blank? # to make this work, the block must reutrn a boolean value
+    violate? user.name.blank?
   end
 end
 
