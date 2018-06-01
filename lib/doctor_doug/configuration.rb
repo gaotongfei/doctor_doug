@@ -18,6 +18,10 @@ module DoctorDoug
   #       from: 'from@gmail.com',
   #       to: 'to@gmail.com'
   #     }
+  #     config.slack_options = {
+  #       token: 'aabbcc',
+  #       channel: '#general'
+  #     }
   #   end
   class << self
     attr_accessor :configuration
@@ -29,7 +33,7 @@ module DoctorDoug
   end
 
   class Configuration # :nodoc:
-    attr_accessor :strategies, :mail_options
+    attr_accessor :strategies, :mail_options, :slack_options
 
     def initialize
       @strategies = [:mail]

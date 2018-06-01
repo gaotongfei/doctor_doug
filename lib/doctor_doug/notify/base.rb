@@ -7,8 +7,11 @@ module DoctorDoug
         strategies = DoctorDoug.configuration.strategies
         strategies = valid_strategies(strategies)
         strategies.each do |strategy|
-          if strategy == :mail
+          case strategy
+          when :mail
             DoctorDoug::Notify::Mail.new(DoctorDoug.configuration, violations: violations).deliver(checkup_name: checkup_name)
+          when :slack
+            DoctorDoug::Notify::SlackAdapter.new(DoctorDoug.configuration.slack_options, violations: violations).deliver(checkup_name: checkup_name)
           end
         end
       end
@@ -16,7 +19,7 @@ module DoctorDoug
 
     class << self
       def valid_strategies(strategies)
-        [:mail] & strategies
+        [:mail, :slack] & strategies
       end
     end
   end

@@ -1,6 +1,6 @@
 # DoctorDoug
 
-Run checkup and notify you by mail when there are violations 
+Run checkup and notify you on mail/slack when there are violations 
 
 ## Installation
 
@@ -24,7 +24,7 @@ Or install it yourself as:
 # config/initializers/doctor_doug.rb
 
 DoctorDoug.configure do |config|
-  config.strategies = [:mail]
+  config.strategies = [:mail, :slack]
   config.mail_options = {
       address: 'smtp.gmail.com',
       port: 587,
@@ -34,6 +34,10 @@ DoctorDoug.configure do |config|
       authentication: 'plain',
       from: 'from@gmail.com',
       to: 'to@gmail.com'
+  }
+  config.slack_options = {
+    token: 'your_slack_token',
+    channel: '#general'
   }
 end
 ```
@@ -45,7 +49,6 @@ DoctorDoug.checkup "user name should not be blank" do
     violate? user.name.blank?
   end
 end
-
 ```
 
 ## Development
